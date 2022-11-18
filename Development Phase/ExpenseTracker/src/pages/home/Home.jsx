@@ -9,6 +9,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import { useEffect, useRef } from "react";
 import axios from 'axios'
 import { useState } from "react";
+import {useNavigate} from 'react-router-dom';
 
 const Home = () => {
   const monthArr = [
@@ -25,11 +26,15 @@ const Home = () => {
     'November',
     'December'
   ]
+  const navigate = useNavigate();
   const cateref=useRef();
   const amountref=useRef();
   const descref=useRef();
   const dateref=useRef();
   const token=localStorage.getItem('token')
+  if(!token) {
+    navigate('/login')
+  }
   const [mainObj, setMainObj] = useState({});
   const [graphObj, setgrObj] = useState([
     {name : monthArr[0], Total: 12000},
@@ -73,6 +78,11 @@ const Home = () => {
     const currDate = new Date()
     const formattedDate = format(currDate)
     let category = Query().get('category');
+    if(!category) {
+      category = "all"
+    } else if(category !== "all") {
+      category = [category]
+    }
     const headers = {
       'token': token,
     }

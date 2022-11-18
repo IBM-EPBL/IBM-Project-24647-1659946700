@@ -18,6 +18,16 @@ import { useContext } from "react";
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
+
+  const handleNavigate = (ev) => {
+    let ele = ev.target
+    while(ele.tagName !== "DIV") {
+      ele = ele.parentNode
+    }
+    let path = ele.getAttribute('to')
+    window.location.href = `http://localhost:3000${path}`
+  }
+  
   return (
     <div className="sidebar">
       <div className="top">
@@ -29,59 +39,61 @@ const Sidebar = () => {
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <li>
-            <DashboardIcon className="icon" />
-            <span>Dashboard</span>
-          </li>
+          <div onClick={handleNavigate} to="/?category=all">
+            <li>
+              <DashboardIcon className="icon" />
+              <span>Dashboard</span>
+            </li>
+          </div>
           <p className="title">LISTS</p>
-          <Link to="/?category=Food" style={{ textDecoration: "none" }}>
+          <div onClick={handleNavigate} to="/?category=Food" style={{ textDecoration: "none" }}>
             <li>
               <FastfoodIcon className="icon" />
               <span>Food</span>
             </li>
-          </Link>
-          <Link to="/?category=Housing" style={{ textDecoration: "none" }}>
+          </div>
+          <div onClick={handleNavigate} to="/?category=Housing" style={{ textDecoration: "none" }}>
             <li>
               <HouseIcon className="icon" />
               <span>Housing</span>
             </li>
-          </Link>
-          <Link to="/?category=Transportation" style={{ textDecoration: "none" }}>
+          </div>
+          <div onClick={handleNavigate} to="/?category=Transportation" style={{ textDecoration: "none" }}>
             <li>
               <DirectionsCarIcon className="icon" />
               <span>Transportation</span>
             </li>
-          </Link>
-          <Link to="/?category=Personal" style={{ textDecoration: "none" }}>
+          </div>
+          <div onClick={handleNavigate} to="/?category=Personal" style={{ textDecoration: "none" }}>
             <li>
               <PersonPinIcon className="icon" />
               <span>Personal Spending</span>
             </li>
-          </Link>
-          <Link to="/?category=Utilities" style={{ textDecoration: "none" }}>
+          </div>
+          <div onClick={handleNavigate} to="/?category=Utilities" style={{ textDecoration: "none" }}>
             <li>
               <AddShoppingCartIcon className="icon" />
               <span>Utilities</span>
             </li>
-          </Link>
-          <Link to="/?category=Debt" style={{ textDecoration: "none" }}>
+          </div>
+          <div onClick={handleNavigate} to="/?category=Debt" style={{ textDecoration: "none" }}>
             <li>
               <AccountBalanceIcon className="icon" />
               <span>Debt Payments </span>
             </li>
-          </Link>
-          <Link to="/?category=Healthcare" style={{ textDecoration: "none" }}>
+          </div>
+          <div onClick={handleNavigate} to="/?category=Healthcare" style={{ textDecoration: "none" }}>
             <li>
               <MonitorHeartIcon className="icon" />
               <span> Medical & Healthcare </span>
             </li>
-          </Link>
-          <Link to="/?category=Recreation" style={{ textDecoration: "none" }}>
+          </div>
+          <div onClick={handleNavigate} to="/?category=Recreation" style={{ textDecoration: "none" }}>
             <li>
               <KitesurfingIcon  className="icon" />
               <span>Recreation & Entertainment</span>
             </li>
-          </Link>
+          </div>
           
           <p className="title">USEFUL</p>
           <li>

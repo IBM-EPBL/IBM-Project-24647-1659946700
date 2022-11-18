@@ -16,7 +16,6 @@ def ExecuteDB(command):
     try:
         conn = ibm_db_dbi.Connection(Connection)
         cur = conn.cursor()
-
         cur.execute(command)
         result = cur.fetchall()
         print(result)
@@ -28,6 +27,20 @@ def ExecuteDB(command):
         print(e)
         return None, False
 
+def ExecuteManyDB(command, sequence):
+    try:
+        conn = ibm_db_dbi.Connection(Connection)
+        cur = conn.cursor()
+        cur.executemany(command, sequence)
+        result = cur.fetchall()
+        print(result)
+        return result, True
+    except ibm_db_dbi.ProgrammingError as e:
+        print(e)
+        return [], True
+    except Exception as e:
+        print(e)
+        return None, False
 
 def ConnectDB(dsn_db, dsn_hostname, dsn_password, dsn_port, dsn_protocol, dsn_uid, dsn_driver):
     global Connection
